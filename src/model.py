@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
@@ -47,3 +46,8 @@ class CNN(nn.Module):
         x = self.fc(x)
         out = self.sigmoid(x).view(-1)
         return out
+
+"""
+Build your own network below
+"""   
+

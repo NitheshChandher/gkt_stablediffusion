@@ -56,3 +56,7 @@ def makedataset(path, img_size, bs, mode):
     dataloder = DataLoader(dataset, batch_size=bs, shuffle=True)
 
     return dataloder
+
+"""
+Create a custom dataloader for your dataset below
+"""

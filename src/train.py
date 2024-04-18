@@ -1,36 +1,26 @@
 import torch
 import argparse
 import yaml
-import torchvision
 import torch.nn as nn
-import torch.nn.functional as F
-from torch.utils.data import DataLoader
-from torch.utils.data import random_split
-from torchvision.datasets import ImageFolder
-from torchvision.transforms import ToTensor, Compose, Resize, Normalize, RandomRotation, RandomHorizontalFlip
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, accuracy_score, classification_report
 from model import CNN
+from dataset import makedataset
 from utils import EarlyStopping, output_to_label, viz
 import os
 import numpy as np
-import matplotlib.pyplot as plt
 import seaborn as sn
 import pandas as pd
 import dataframe_image as dfi
 
-def model_setup(config,seed,exp):
-    #=== Directories ===#
-    if exp == 'AFHQ':
-        exp_name = config['model1']
-    
-    else:
-        exp_name = config['model2'] 
-
-    save_path = config['save_path'] + f'{exp_name}-{seed}'
-    save_plot = config['save_plot'] + f'{exp_name}-{seed}'
+def model_setup(config,seed):
+    #=== Directories ===# 
+    exp_name = config['model']
+    data_path = config['data_path']
+    save_path = config['save_path'] + f'{exp_name}-{seed}/'
+    save_plot = config['save_plot'] + f'{exp_name}-{seed}/'
 
     if not os.path.exists(save_path):
-        os.makedirs(save_path, exist_ok=True)
+        os.makedirs(save_path)
     
     if not os.path.exists(save_plot):
         os.makedirs(save_plot)
@@ -59,7 +49,9 @@ def model_setup(config,seed,exp):
         print('The loss function is not defined. Choose BCE, NLL or CrossEntropy in config file') 
     
     #=== Data Loaders ===#
-        
+    train_dataloader = makedataset(data_path+f'train',img_size,bs,'Train')
+    val_dataloader = makedataset(data_path+f'val',img_size,bs,'Validation')
+    
     #Define Model
     model = CNN(image_size=img_size)
 
@@ -76,7 +68,7 @@ def model_setup(config,seed,exp):
                                                                 config=config)
     torch.save(model, save_path)
     viz(train_losses, train_acc, val_losses, val_acc, save_plot)
-    print(f'Model-{exp_name}-{seed} training is completed!')
+    print(f'Model-{exp_name}-{seed} training is completed!') 
 
 def train(model, optimizer, loss_fn, train_loader, val_loader, num_epochs, config):
     device = torch.device("cuda" if torch.cuda.is_available()
@@ -109,7 +101,6 @@ def train(model, optimizer, loss_fn, train_loader, val_loader, num_epochs, confi
     return model, train_losses, train_accs, val_losses, val_accs
 
 def train_epoch(model, optimizer, loss_fn, train_loader, device):
-    #Train:
     model.train()
     train_loss, train_acc = [], []
     for _, (x,y) in enumerate(train_loader,1):
@@ -138,20 +129,7 @@ def eval_epoch(model, loss_fn, val_loader, device):
             hard_pred = output_to_label(z)
             acc_avg = (hard_pred == label).float().mean().item()
             eval_acc.append(acc_avg) 
-    return eval_loss, eval_acc
-
-def setup(config):
-    #=== Directories ===#
-    rd_path = config['real_data_path']
-    sd_path = config['syn_data_path']
-    save_path = config['save_path']
-    model1 = config['model1']
-    model2 = config['model2']
-    save_rmodel = save_path + model1
-    save_synmodel =  save_path + model2
-    seeds = config['seed']
-    seed = seeds[0]
-    model_setup(config,seed,exp=model1)
+    return eval_loss, eval_acc 
 
 def main():
     parser = argparse.ArgumentParser()
@@ -159,7 +137,13 @@ def main():
     args = parser.parse_args()
     with open(args.config,"r") as file:
         config = yaml.safe_load(file)
-    setup(config)
+    seeds = config['seed']
+    print('========================================')
+    print('Starting model training on Dataset:')
+    print('========================================')
+    for seed in seeds:
+        model_setup(config,seed)
+    return print('Training Completed!') 
 
 if __name__ == '__main__':
     main()
