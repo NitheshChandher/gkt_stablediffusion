@@ -16,8 +16,8 @@ def model_setup(config,seed):
     #=== Directories ===# 
     exp_name = config['model']
     data_path = config['data_path']
-    save_path = config['save_path'] + f'{exp_name}-{seed}/'
-    save_plot = config['save_plot'] + f'{exp_name}-{seed}/'
+    save_path = config['save_path']
+    save_plot = config['save_plot'] 
 
     if not os.path.exists(save_path):
         os.makedirs(save_path)
@@ -66,8 +66,8 @@ def model_setup(config,seed):
                                                                 loss_fn=loss, train_loader=train_dataloader,
                                                                 val_loader=val_dataloader, num_epochs=epochs, 
                                                                 config=config)
-    torch.save(model, save_path)
-    viz(train_losses, train_acc, val_losses, val_acc, save_plot)
+    torch.save(model, save_path+f'{exp_name}-{seed}.pt')
+    viz(train_losses, train_acc, val_losses, val_acc, save_plot+f'Plot-{exp_name}-{seed}.png')
     print(f'Model-{exp_name}-{seed} training is completed!') 
 
 def train(model, optimizer, loss_fn, train_loader, val_loader, num_epochs, config):

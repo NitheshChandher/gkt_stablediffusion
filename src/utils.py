@@ -60,5 +60,4 @@ def viz(train_losses, train_acc, val_losses, val_acc, path):
     plt.legend()
 
     plt.tight_layout()
-    name = f'performance_plot.png'
-    plt.savefig(path+name)
+    plt.savefig(path)

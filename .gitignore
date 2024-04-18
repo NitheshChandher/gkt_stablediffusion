@@ -16,7 +16,7 @@ __pycache__/
 
 #data and results folder
 afhq/
-models/
-plot/
+result/models/
+result/plot/
 
 *.ipynb
