@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 import matplotlib.pyplot as plt
 class EarlyStopping:
     def __init__(self, tolerance=5, min_delta=0):
@@ -7,12 +8,24 @@ class EarlyStopping:
         self.min_delta = min_delta
         self.counter = 0
         self.early_stop = False
+        self.best_score = np.inf
 
-    def __call__(self, train_loss, validation_loss):
-        if (validation_loss - train_loss) > self.min_delta:
+    def __call__(self, validation_loss):
+        score = validation_loss
+        if score > self.best_score - self.min_delta:
             self.counter +=1
-            if self.counter >= self.tolerance:  
+            if self.counter >= self.tolerance:
                 self.early_stop = True
+        else:
+            self.best_score = score
+            self.counter = 0
+
+class ClearCache:
+    def __enter__(self):
+        torch.cuda.empty_cache()
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        torch.cuda.empty_cache()
 
 def output_to_label(z):
     
@@ -26,7 +39,7 @@ def output_to_label(z):
     c = (z > 0.5).type(torch.long)
     return c
 
-def viz(train_losses, train_acc, val_losses, val_acc, path):
+def viz(train_losses, train_acc, val_losses, val_acc, path, name):
     """
     Plot performance curves of the models and saves the plot as PNG
     
@@ -40,10 +53,6 @@ def viz(train_losses, train_acc, val_losses, val_acc, path):
     epochs = range(1, len(train_losses)+1)
 
     plt.figure(figsize=(12, 6))
-    print(train_losses)
-    print(type(train_losses))
-    print(val_losses)
-    print(type(val_losses))
     #Plot Loss
     plt.subplot(1,2,1)
     plt.plot(epochs, train_losses, 'b', label='Train Loss')
@@ -61,6 +70,6 @@ def viz(train_losses, train_acc, val_losses, val_acc, path):
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     plt.legend()
-
+    plt.suptitle(name)
     plt.tight_layout()
-    plt.savefig(path)
+    plt.savefig(path+name+'.png')
