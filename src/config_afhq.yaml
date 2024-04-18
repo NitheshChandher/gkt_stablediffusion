@@ -1,6 +1,5 @@
 #=== Directories ===#
-real_data_path: /afhq
-syn_data_path: /sd
+data_path: /afhq
 save_path: /models/
 save_plot: /plot/
 
@@ -9,8 +8,7 @@ batch_size: 128
 img_size: 224
 
 #=== Training Param ===#
-model1: nn_afhq
-model2: nn_syn_afhq 
+model: nn_afhq
 num_epochs: 30
 learning_rate: 0.0001
 beta_1: 0.9
