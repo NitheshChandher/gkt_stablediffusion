@@ -125,7 +125,7 @@ def eval_epoch(model, loss_fn, val_loader, device):
             input, label = x.to(device), y.to(device)
             z = model.forward(input)
             loss = loss_fn(z, label.float())
-            eval_loss.append(loss)
+            eval_loss.append(loss.item())
             hard_pred = output_to_label(z)
             acc_avg = (hard_pred == label).float().mean().item()
             eval_acc.append(acc_avg) 

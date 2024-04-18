@@ -40,7 +40,10 @@ def viz(train_losses, train_acc, val_losses, val_acc, path):
     epochs = range(1, len(train_losses)+1)
 
     plt.figure(figsize=(12, 6))
-    
+    print(train_losses)
+    print(type(train_losses))
+    print(val_losses)
+    print(type(val_losses))
     #Plot Loss
     plt.subplot(1,2,1)
     plt.plot(epochs, train_losses, 'b', label='Train Loss')
