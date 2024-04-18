@@ -1,7 +1,7 @@
 #=== Directories ===#
-data_path: /sd
-save_path: /models/
-save_plot: /plot/
+data_path: ./sd/
+save_path: ./models/
+save_plot: ./plot/
 
 #=== Data Param ===#
 batch_size: 128

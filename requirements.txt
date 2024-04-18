@@ -1,0 +1,15 @@
+pyyaml
+numpy
+ipykernel
+ipympl
+ipywidgets
+jupyter
+matplotlib
+notebook
+numpy
+seaborn
+pandas
+scikit-image
+scikit-learn
+scipy
+dataframe-image
