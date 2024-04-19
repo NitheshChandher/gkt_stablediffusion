@@ -1,7 +1,7 @@
 # Generative Knowledge Transfer using Stable Diffusion
 ---
 
-Generative Knowledge Transfer refers to the process of leveraging the generative knowledge of large scale foundational generative models for improving the performance of downstream machine learning tasks. In this repository, we experiment with this idea by selecting [AFHQ](https://github.com/clovaai/stargan-v2/blob/master/README.md#animal-faces-hq-dataset-afhq) as a benchmark dataset and generate synthetic data using Stable Diffusion in a zero-shot setting. We evaluate the data quality of the generated dataset by training different classifiers on the datasets and validate their performance on AFHQ test set. 
+Generative Knowledge Transfer refers to the process of leveraging the generative knowledge of large scale foundational generative models for improving the performance of downstream machine learning tasks. In this repository, we experiment with this idea by selecting [AFHQ](https://github.com/clovaai/stargan-v2/blob/master/README.md#animal-faces-hq-dataset-afhq) as a benchmark dataset and generate synthetic data using Stable Diffusion in a zero-shot setting. We evaluate the data quality of the generated dataset by training different classifiers on the datasets and validate their performance on AFHQ validation set. 
 
 ---
 
@@ -92,4 +92,4 @@ If you have any questions or comments, please open an [issue](https://github.com
 ## Acknowledgement
 The project was implemented during my Ph.D. studies as a part of Deep Generative Models course at Linkoping University. This work was supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP), funded by the Knut and Alice Wallenberg Foundation.
 
-We used the [AFHQ](https://github.com/clovaai/stargan-v2) dataset for our experiments. Also, synthetic dataset was created using the Stable Diffusion model developed by [CompVis](https://ommer-lab.com/), [Stability AI](https://stability.ai/) and [Runway](https://runwayml.com/). We would like to acknowledge their contribution to the field of generative models.
+The [AFHQ](https://github.com/clovaai/stargan-v2) dataset was used for the experiments. Also, synthetic dataset was created using the Stable Diffusion model developed by [CompVis](https://ommer-lab.com/), [Stability AI](https://stability.ai/) and [Runway](https://runwayml.com/). We would like to acknowledge their contribution to the field of generative models.
