@@ -1,0 +1,7 @@
+#=== Directories ===#
+data_path: ./afhq/
+model_path: ./result/models/
+
+#=== Data Param ===#
+batch_size: 128
+img_size: 224

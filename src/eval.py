@@ -13,7 +13,7 @@ def eval(config):
     model_path = config['model_path']
     bs = config['batch_size']
     img_size = config['img_size']
-    test_dataloader = makedataset(data_path,img_size,bs,'Test')
+    test_dataloader = makedataset(data_path+f'test',img_size,bs,'Test')
     for _model_ in os.listdir(model_path):
         model = torch.load(model_path + _model_)
         device = torch.device("cuda" if torch.cuda.is_available()
