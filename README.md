@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 ## Dataset
 
-## AFHQ Dataset
+### AFHQ Dataset
 The repository makes use of [stargan-v2](https://github.com/clovaai/stargan-v2) to download dataset. Set up the submodules using the following command:
 ```
 git submodule update --init
@@ -50,7 +50,7 @@ bash download.sh afhq-dataset
 ```
 For our implementation, we only used images of cat and dog. However, you can include the images of wild animal for your experiments.
 
-## Synthetic Data
+### Synthetic Data
 For generating synthetic data, we use the submodules from the [stable-diffusion](https://github.com/CompVis/stable-diffusion). Follow the steps below to generate synthetic dataset:
 1. Download the [stable-diffusion](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original) checkpoint from hugging face.
 2. Read the run_data.sh and choose the parameters for the dataset sampling.
