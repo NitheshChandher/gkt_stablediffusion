@@ -7,8 +7,8 @@ Generative Knowledge Transfer refers to the process of leveraging the generative
 
 ## Table of Contents
 - [Installation](#installation)
-    *[Conda](#conda)
-    *[Pip](#pip)
+    * [Conda](#conda)
+    * [Pip](#pip)
 - [Dataset](#dataset)
     *[AFHQ](#afhq-dataset)
     *[Synthetic Data](#synthetic-data)
