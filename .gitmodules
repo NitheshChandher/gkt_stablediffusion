@@ -1,6 +1,3 @@
-[submodule "stable-diffusion"]
-	path = stable-diffusion
-	url = https://github.com/CompVis/stable-diffusion.git
 [submodule "stargan-v2"]
 	path = stargan-v2
 	url = https://github.com/clovaai/stargan-v2.git
