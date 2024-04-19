@@ -1,5 +1,5 @@
 #=== Directories ===#
-data_path: ./sd/
+data_path: ./synthetic_data/
 save_path: ./models/
 save_plot: ./plot/
 
